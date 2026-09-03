@@ -38,7 +38,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans text-gray-800 pb-24 md:pb-10">
+<body class="bg-gray-100 font-sans text-gray-800 pb-24 md:pb-10 flex flex-col min-h-screen">
 
     <!-- Header / Navbar -->
     <header class="bg-white sticky top-0 z-30 shadow-sm border-b border-gray-200">
@@ -67,7 +67,7 @@
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-4xl mx-auto px-4 py-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <main class="max-w-4xl mx-auto px-4 py-4 grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow w-full">
 
         <!-- Left Column: Menu Makanan -->
         <section class="md:col-span-2 space-y-4">
@@ -101,7 +101,7 @@
             </div>
 
             <!-- Grid Menu List -->
-            <div id="menu-container" class="grid grid-cols-1 gap-3">
+            <div id="menu-container" class="grid grid-cols-2 gap-3 sm:gap-4 mt-2">
                 <!-- Menu item diproduksi via JS -->
             </div>
         </section>
@@ -186,6 +186,18 @@
         </section>
     </main>
 
+    <!-- Footer Section -->
+    <footer class="bg-white border-t border-gray-200 py-6 mt-10 text-center text-xs text-gray-500 w-full">
+        <div class="max-w-4xl mx-auto px-4 space-y-1.5">
+            <p>&copy; <span id="current-year">2026</span> <span class="font-bold text-gray-800">GoFood Express</span>. All rights reserved.</p>
+            <p>Designed by 
+                <a href="https://www.instagram.com/nauf_al606" target="_blank" rel="noopener noreferrer" class="font-bold text-gofood hover:text-gofoodDark hover:underline inline-flex items-center gap-1 transition">
+                    <i class="fa-brands fa-instagram text-sm"></i> NAUFAL_AR
+                </a>
+            </p>
+        </div>
+    </footer>
+
     <!-- Modal Resi Pemesanan -->
     <div id="resi-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl relative max-h-[90vh] overflow-y-auto no-scrollbar border border-gray-100">
@@ -206,7 +218,7 @@
             <!-- QR Code Section -->
             <div class="my-4 text-center bg-gray-50 p-3 rounded-2xl border border-gray-200">
                 <p class="text-[11px] font-semibold text-gray-500 mb-2 uppercase tracking-wide">Kode Pesanan / Scan Kasir</p>
-                <div id="qrcode-container" class="flex justify-center my-1">
+                <div id="qrcode-container" class="flex justify-center my-1 min-h-[130px] items-center">
                     <!-- QR Code Image akan dimasukkan di sini -->
                 </div>
                 <p id="resi-code" class="font-mono font-bold text-base text-gray-800 tracking-wider mt-1">#GF-000000</p>
@@ -317,71 +329,31 @@
         // Data Admin WA
         const ADMIN_WA_NUMBER = "6282347734997";
 
-        // Master Data Menu Makanan
+        // Master Data Menu Makanan Lengkap
         const menuData = [
-            {
-                id: 1,
-                name: "Nasi Goreng Spesial GoFood",
-                category: "makanan",
-                price: 28000,
-                rating: 4.9,
-                desc: "Nasi goreng beraroma rempah pilihan + telur mata sapi + ayam suwir + kerupuk.",
-                image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=300&q=80"
-            },
-            {
-                id: 2,
-                name: "Ayam Goreng Lengkuas + Nasi",
-                category: "makanan",
-                price: 32000,
-                rating: 4.8,
-                desc: "Ayam goreng empuk tabur serundeng lengkuas gurih, sambal terasi & lalapan.",
-                image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=300&q=80"
-            },
-            {
-                id: 3,
-                name: "Mie Goreng Mamak Pedas",
-                category: "makanan",
-                price: 25000,
-                rating: 4.7,
-                desc: "Mie telur kenyal ditumis pedas manis lengkap dengan bakso iris dan sayuran fresh.",
-                image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=300&q=80"
-            },
-            {
-                id: 4,
-                name: "Kentang Goreng Keju (French Fries)",
-                category: "snack",
-                price: 18000,
-                rating: 4.6,
-                desc: "Kentang renyah ditaburi bumbu keju spesial & saus sambal.",
-                image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=300&q=80"
-            },
-            {
-                id: 5,
-                name: "Dimsum Ayam Mix (4 Pcs)",
-                category: "snack",
-                price: 22000,
-                rating: 4.9,
-                desc: "Dimsum olahan daging ayam segar lembut disajikan dengan saus chilli oil.",
-                image: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=300&q=80"
-            },
-            {
-                id: 6,
-                name: "Es Boba Brown Sugar Fresh Milk",
-                category: "minuman",
-                price: 20000,
-                rating: 4.9,
-                desc: "Susu segar creamy dengan sirup gula aren asli dan boba kenyal favorit.",
-                image: "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=300&q=80"
-            },
-            {
-                id: 7,
-                name: "Es Teh Manis Jumbo",
-                category: "minuman",
-                price: 6000,
-                rating: 4.8,
-                desc: "Teh melati pilihan disajikan dingin menyegarkan.",
-                image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=300&q=80"
-            }
+            // MAKANAN UTAMA
+            { id: 1, name: "Nasi Goreng Spesial GoFood", category: "makanan", price: 28000, rating: 4.9, badge: "🌟 Terlaris", desc: "Nasi goreng bumbu rempah pilihan + telur mata sapi + ayam suwir + kerupuk.", image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, name: "Ayam Goreng Lengkuas", category: "makanan", price: 32000, rating: 4.8, desc: "Ayam goreng empuk tabur serundeng lengkuas gurih, sambal terasi & lalapan.", image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80" },
+            { id: 3, name: "Mie Goreng Mamak Pedas", category: "makanan", price: 25000, rating: 4.7, badge: "🔥 Pedas", desc: "Mie telur kenyal ditumis pedas manis lengkap dengan bakso iris dan sayuran.", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80" },
+            { id: 8, name: "Sate Ayam Madura (10 Tusuk)", category: "makanan", price: 25000, rating: 4.9, desc: "Sate ayam full daging panggang dengan bumbu kacang kental dan irisan bawang.", image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+            { id: 9, name: "Nasi Padang Rendang Daging", category: "makanan", price: 35000, rating: 5.0, badge: "✨ Rekomendasi", desc: "Nasi putih hangat dengan rendang daging empuk, sayur nangka, dan kuah kental.", image: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=600&q=80" },
+            { id: 10, name: "Soto Ayam Lamongan", category: "makanan", price: 22000, rating: 4.8, desc: "Soto kuah kuning gurih, koya, suwiran ayam, soun, dan telur rebus.", image: "https://images.unsplash.com/photo-1548943487-a2e4b43b4853?auto=format&fit=crop&w=600&q=80" },
+            { id: 11, name: "Ayam Geprek Sambal Bawang", category: "makanan", price: 20000, rating: 4.9, badge: "🔥 Super Pedas", desc: "Ayam crispy digeprek hancur dengan sambal bawang super pedas level 1-5.", image: "https://images.unsplash.com/photo-1626082896492-766af4eb65ed?auto=format&fit=crop&w=600&q=80" },
+            { id: 12, name: "Nasi Uduk Betawi Komplit", category: "makanan", price: 25000, rating: 4.7, desc: "Nasi uduk gurih dengan ayam goreng, semur tahu tempe, bihun, dan kerupuk.", image: "https://images.unsplash.com/photo-1615486171448-4fb58235cb35?auto=format&fit=crop&w=600&q=80" },
+
+            // CAMILAN & SNACK
+            { id: 4, name: "Kentang Goreng Keju", category: "snack", price: 18000, rating: 4.6, desc: "Kentang renyah ditaburi bumbu keju spesial & saus sambal.", image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80" },
+            { id: 5, name: "Dimsum Ayam Mix (4 Pcs)", category: "snack", price: 22000, rating: 4.9, badge: "🌟 Terlaris", desc: "Dimsum olahan daging ayam segar lembut disajikan dengan saus chilli oil.", image: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=600&q=80" },
+            { id: 13, name: "Pisang Goreng Coklat Keju", category: "snack", price: 15000, rating: 4.8, desc: "Pisang kepok manis digoreng tepung dengan topping meises dan keju parut.", image: "https://images.unsplash.com/photo-1623653387945-2fd256d4f22f?auto=format&fit=crop&w=600&q=80" },
+            { id: 14, name: "Tahu Walik Crispy Pedas", category: "snack", price: 12000, rating: 4.7, desc: "Tahu pong dibalik dengan isian aci gurih digoreng kering krispi + bumbu balado.", image: "https://images.unsplash.com/photo-1596649283733-4029272fdf19?auto=format&fit=crop&w=600&q=80" },
+            { id: 15, name: "Martabak Telur Mini", category: "snack", price: 20000, rating: 4.8, badge: "✨ Favorit", desc: "Kulit lumpia renyah diisi paduan telur, daging cincang, dan daun bawang segar.", image: "https://images.unsplash.com/photo-1626082929543-690226b9a89d?auto=format&fit=crop&w=600&q=80" },
+            
+            // MINUMAN
+            { id: 6, name: "Es Boba Brown Sugar", category: "minuman", price: 20000, rating: 4.9, badge: "🌟 Terlaris", desc: "Susu segar creamy dengan sirup gula aren asli dan boba kenyal favorit.", image: "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=600&q=80" },
+            { id: 7, name: "Es Teh Manis Jumbo", category: "minuman", price: 6000, rating: 4.8, desc: "Teh melati pilihan disajikan dingin menyegarkan dalam porsi gelas besar.", image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80" },
+            { id: 16, name: "Es Kopi Susu Gula Aren", category: "minuman", price: 18000, rating: 4.9, desc: "Espresso base dipadu dengan susu segar dan manisnya gula aren alami.", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" },
+            { id: 17, name: "Es Jeruk Nipis Peras", category: "minuman", price: 10000, rating: 4.7, desc: "Perasan jeruk nipis asli dipadu gula cair dan es batu, sangat menyegarkan.", image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" },
+            { id: 18, name: "Jus Alpukat Coklat", category: "minuman", price: 16000, rating: 4.8, badge: "✨ Segar", desc: "Jus alpukat murni dan kental ditambah lelehan krimer kental manis cokelat.", image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=600&q=80" }
         ];
 
         // Global State
@@ -393,6 +365,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderMenu('semua');
             updateCartDisplay();
+            // Dynamic Year Update
+            const yearElem = document.getElementById('current-year');
+            if (yearElem) yearElem.innerText = new Date().getFullYear();
         });
 
         // Render Menu Cards
@@ -405,23 +380,27 @@
                 : menuData.filter(m => m.category === categoryFilter);
 
             filtered.forEach(item => {
+                // Render badge dinamis jika item memiliki properti badge
+                const badgeHtml = item.badge ? `<span class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-10 tracking-wide">${item.badge}</span>` : '';
+
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl p-3 shadow-sm border border-gray-100 flex gap-3 items-center hover:shadow-md transition";
+                card.className = "bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden group h-full relative";
                 
                 card.innerHTML = `
-                    <div class="relative w-24 h-24 flex-shrink-0">
-                        <img src="${item.image}" alt="[Foto Makanan: ${item.name}]" class="w-full h-full object-cover rounded-xl" loading="lazy">
-                        <span class="absolute top-1 left-1 bg-white/90 backdrop-blur-sm text-[10px] font-bold text-gray-800 px-1.5 py-0.5 rounded-md flex items-center gap-0.5 shadow-sm">
+                    ${badgeHtml}
+                    <div class="relative w-full h-32 sm:h-40 overflow-hidden bg-gray-100">
+                        <img src="${item.image}" alt="[Foto: ${item.name}]" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
+                        <div class="absolute bottom-2 left-2 bg-white/90 backdrop-blur-md text-[11px] font-bold text-gray-900 px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
                             <i class="fa-solid fa-star text-amber-400"></i> ${item.rating}
-                        </span>
+                        </div>
                     </div>
-                    <div class="flex-grow min-w-0">
-                        <h3 class="font-bold text-sm text-gray-900 truncate">${item.name}</h3>
-                        <p class="text-xs text-gray-500 line-clamp-2 mt-0.5">${item.desc}</p>
-                        <div class="flex justify-between items-center mt-2">
-                            <span class="font-extrabold text-sm text-gray-900">Rp ${item.price.toLocaleString('id-ID')}</span>
-                            <button onclick="addToCart(${item.id})" class="bg-gofood hover:bg-gofoodDark text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow-sm transition active:scale-95 flex items-center gap-1">
-                                <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                    <div class="p-3 flex flex-col flex-grow bg-gradient-to-b from-white to-gray-50/30">
+                        <h3 class="font-bold text-sm text-gray-900 line-clamp-2 leading-snug">${item.name}</h3>
+                        <p class="text-[11px] text-gray-500 line-clamp-2 mt-1 mb-2 flex-grow">${item.desc}</p>
+                        <div class="flex flex-col xl:flex-row xl:justify-between xl:items-center mt-auto gap-2 pt-1 border-t border-gray-100/50">
+                            <span class="font-extrabold text-[15px] text-gray-900">Rp ${item.price.toLocaleString('id-ID')}</span>
+                            <button onclick="addToCart(${item.id})" class="bg-gofood hover:bg-gofoodDark text-white px-3 py-2 xl:py-1.5 rounded-xl text-xs font-bold shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5 w-full xl:w-auto">
+                                <i class="fa-solid fa-cart-plus"></i> Tambah
                             </button>
                         </div>
                     </div>
@@ -640,10 +619,25 @@
 
             document.getElementById('resi-total').innerText = `Rp ${grandTotal.toLocaleString('id-ID')}`;
 
-            // Generate QR Code via Public API
+            // Generate Functional QR Code Text Format (Easy to read for generic QR Scanners)
+            const qrTextData = `TOKO: GoFood Express\nRESI: ${randomCode}\nLAYANAN: ${currentGeneratedOrder.type.toUpperCase()}\n${orderType === 'dinein' ? `MEJA: ${tableNumber}\n` : ''}TOTAL: Rp${grandTotal.toLocaleString('id-ID')}\nBAYAR: ${paymentMethod}`;
+            const qrUrlEncoded = encodeURIComponent(qrTextData);
+            
+            // Build and display Image with loading fallback
             const qrContainer = document.getElementById('qrcode-container');
-            const qrData = encodeURIComponent(`RESI:${randomCode}|TOTAL:${grandTotal}|MEJA:${orderType === 'dinein' ? tableNumber : 'TAKEAWAY'}`);
-            qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${qrData}" alt="[QR Code Resi ${randomCode}]" class="rounded-lg shadow-sm border border-gray-200">`;
+            qrContainer.innerHTML = `<span class="text-xs text-gray-400 animate-pulse">Menghasilkan QR...</span>`;
+            
+            const img = new Image();
+            img.onload = () => {
+                qrContainer.innerHTML = '';
+                qrContainer.appendChild(img);
+            };
+            img.onerror = () => {
+                qrContainer.innerHTML = '<span class="text-xs text-red-500">Gagal memuat QR Code.</span>';
+            }
+            img.className = "rounded-lg shadow-sm border border-gray-200";
+            img.alt = `[QR Code Resi ${randomCode}]`;
+            img.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrUrlEncoded}&margin=10`;
 
             // Display Modal
             document.getElementById('resi-modal').classList.remove('hidden');
